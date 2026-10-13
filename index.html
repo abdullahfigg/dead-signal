@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,25 +9,47 @@
 </head>
 <body>
     <div class="system-bar">
-        <span> NEXUS // <MONITORING STATION</span>
-            <span id="clock">00:00:00</span>
-            <span class="network-status">● OFFLINE</span>
+        <span>NEXUS // MONITORING STATION</span>
+        <span id="clock">00:00:00</span>
+        <span class="network-status">● OFFLINE</span>
     </div>
-    
+
     <h1>DEAD SIGNAL</h1>
     <p>NETWORK STATUS: CONNECTION LOST</p>
 
     <div class="desktop">
-        <button onclick="openApp('files')">Files</button>
-        <button onclick="openApp('terminal')">Terminal</button>
-        <button onclick="openApp('browser')">Browser</button>
+        <button class="desktop-icon" onclick="openApp('files')">
+            <span class="icon-symbol">▤</span>
+            <span class="icon-lable">FILE SYSTEM</span>
+        </button>
+
+        <button class="desktop-icon" onclick="openApp('terminal')">
+            <span class="icon-symbol">&gt;_</span>
+            <span class="icon-lable">TERMINAL</span>
+        </button>
+
+        <button class="desktop-icon" onclick="openApp('browser')">
+            <span class="icon-symbol">◎</span>
+            <span class="icon-lable">NETOWORK</span>
+            
+        </button>
     </div>
+
     <div id="app-window">
-        <h2 id="app-title">Application</h2>
-        <p id="app-content">Welcome.</p>
-        <button onclick="closeApp()">Close x</button>
+        <div class="window-titlebar">
+            <h2 id="app-title">Application</h2>
+            <button class="close-button" onclick="closeApp()">X</button>
+        </div>
+
+        <div id="app-content">Welcome.</div>
     </div>
-    
+
+    <div class="taskbar">
+        <span class="taskbar-brand">NEXUS OS</span>
+        <span class="taskbar-message">REGIONAL NETWORK: OFFLINE</span>
+        <span class="taskbar-version">SYS v0.1</span>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

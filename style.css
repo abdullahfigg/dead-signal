@@ -24,26 +24,7 @@ p {
     display: inline-block;
 }
 
-.desktop {
-    display: flex;
-    gap: 12px;
-    margin-top: 25px;
-}
 
-button {
-    background-color: #101a14;
-    color: #39ff88;
-    border: 1px solid #39ff88;
-    padding: 12px 16px;
-    font-family: "Courier New",monospace;
-    cursor: pointer;
-
-}
-
-button:hover {
-    background-color: #193b27;
-
-}
 
 #app-window {
     display: none;
@@ -70,29 +51,6 @@ button:hover {
     
 }
 
-.desktop {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 18px;
-    margin-top: 35px;
-
-}
-
-.desktop button {
-    width: 115px;
-    min-height: 90px;
-    background-color: #0d1510;
-    border: 1px solid #24563a;
-    font-size: 14px;
-    transition: background-color 0.2s , border-color 0.2s;
-
-}
-
-.desktop button:hover {
-    background-color: #193b27;
-    border-color: #39ff88;
-
-}
 
 #app-window {
     background-color: #0d1510;
@@ -137,27 +95,196 @@ body > p {
 
 }
 
+
 .desktop {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 14px;
-    margin: 30px 20px;
+    gap: 12px;
+    margin: 24px 16px;
 
 }
 
 .desktop button {
-    width: 120px;
+    width: 110px;
     min-height: 85px;
     background: transparent;
     border: 1px solid transparent;
     color: #39ff88;
     font-size: 14px;
-    
+    font-family: "Courier New", monospace;
+    cursor: pointer;
+    transition: background-color 0.2s , border-color 0.2s;
+
 }
 
 .desktop button:hover {
     background-color: #13251a;
     border-color: #24563a;
 
+}
+
+.taskbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    min-height: 42px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 18px;
+    background-color: #0d1510;
+    border-top: 1px solid #24563a;
+    color: #39ff88;
+    font-size: 11px;
+    letter-spacing: 1px;
+    z-index: 100;
+
+}
+
+.taskbar-message {
+    color: #ff4545;
+
+}
+
+.taskbar-version {
+    color: #7caa8b;
+
+}
+
+#app-window {
+    display: none;
+    position: fixed;
+    top: 18%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(560px , 85vw);
+    max-height: 60vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #39ff88;
+    background-color: #0d1510;
+    box-shadow: 0 0 24px #102c1b;
+    z-index: 50;
+
+}
+
+.window-titlebar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 14px;
+    background-color: #14251a;
+    border-bottom: 1px solid #24563a;
+
+}
+
+#app-title {   
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    font-size: 16px;
+
+}
+
+.close-button {
+    padding: 5px 10px;
+    color: #ff4545;
+    border-color: #ff4545;
+
+}
+
+#app-content {
+    padding: 18px;
+    color: #b4d9bf;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+
+#app-window,
+#app-content {
+    background-color: #0d1510;
+    color: #b4d9bf;
+
+}
+
+#app-content p {
+    display: block;
+    color: #b4d9bf;
+    background: transparent;
+    border: none;
+    padding: 0;
+
+}
+
+#app-content button {
+    background-color: #101a14;
+    color: #39ff88;
+    border: 1px solid #24563a;
+
+}
+
+#app-content button:hover {
+    background-color: #193b27;
+    border-color: #39ff88;
+
+}
+
+.window-titlebar {
+    cursor: grab;
+    user-select: none;
+
+}
+
+.window-titlebar:active {
+    cursor: grabbing;
+}
+
+
+.desktop {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    margin: 24px 20px ;
+
+}
+
+.desktop-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    width: 115px;
+    min-height: 100px;
+    padding: 12px;
+    background: rgba(13, 21, 16, 0.65);
+    border: 1px solid #24563a;
+    border-radius: 6px;
+    color: #39ff88;
+    font-family: "Courier New",monospace;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s,
+                box-shadow 0.2s, transform 0.2s;
+}
+
+.icon-symbol {
+    font-size: 34px;
+    font-weight: bold;
+    text-shadow: 0 0 10px #39ff88;
+
+}
+
+.icon-label {
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-align: center;
 }
