@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEAD SIGNAL</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="system-bar">
+        <span> NEXUS // <MONITORING STATION</span>
+            <span id="clock">00:00:00</span>
+            <span class="network-status">● OFFLINE</span>
+    </div>
+    
+    <h1>DEAD SIGNAL</h1>
+    <p>NETWORK STATUS: CONNECTION LOST</p>
+
+    <div class="desktop">
+        <button onclick="openApp('files')">Files</button>
+        <button onclick="openApp('terminal')">Terminal</button>
+        <button onclick="openApp('browser')">Browser</button>
+    </div>
+    <div id="app-window">
+        <h2 id="app-title">Application</h2>
+        <p id="app-content">Welcome.</p>
+        <button onclick="closeApp()">Close x</button>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
