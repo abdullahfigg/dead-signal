@@ -288,3 +288,441 @@ body > p {
     letter-spacing: 1px;
     text-align: center;
 }
+
+
+body {
+    background-color: #050b08;
+    background-image: 
+    radial-gradient(
+        ellipse at 50% 40%,
+        rgba(18, 65,40,0.35),
+        transparent 70%
+    ) , 
+    linear-gradient(
+        rgba(57,255,136,0.035) 1px,
+        transparent 1px
+
+    ),
+    linear-gradient(
+        90deg,
+        rgba(57,255,136,0.035) 1px,
+        transparent 1px
+    );
+    background-size: 100% 100%, 32px 32px,32px 32px;
+    background-attachment: fixed;
+}
+
+
+.system-bar {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    min-height: 42px;
+    box-sizing: border-box;
+    background: rgba(5 , 11 , 8 , 0.96);
+    border: none;
+    border-bottom: 1px solid #24563a;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+
+}
+
+.panel-left,
+.panel-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+}
+
+.launcher-button {
+    padding: 7px 12px;
+    background: #13251a;
+    color: #39ff88;
+    border: 1px solid #24563a;
+    border-radius: 4px;
+    font: bold 12px "Courier New",monospace;
+    cursor: pointer;
+}
+
+.launcher-button:hover {
+    background-color: #193b27;
+    border-color: #39ff88;
+
+}
+
+.workspace-label {
+    color: #7caa8b;
+    font-size: 11px;
+    letter-spacing: 1px;
+
+}
+
+.panel-right {
+    white-space: nowrap;
+
+}
+
+
+.launcher-menu {
+    display: none;
+    position: fixed;
+    top: 50px;
+    left: 12px;
+    width: 230px;
+    padding: 12px;
+    box-sizing: border-box;
+    background: #0b140e;
+    border: 1px solid #24563a;
+    box-shadow: 0 0 24px rgba(0,0,0,0.7);
+    z-index: 200;
+
+}
+
+.launcher-heading {
+    padding: 8px;
+    margin-bottom: 8px;
+    color: #7caa8b;
+    font-size: 10px;
+    letter-spacing: 2px;
+    border-bottom: 1px solid #24563a;
+
+}
+
+.launcher-menu button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    text-align: left;
+    color: #39ff88;
+    background: transparent;
+    border: 1px solid transparent;
+    font: 12px "Courier New",monospace;
+    cursor: pointer;
+}
+
+
+/* Linux-inspired bottom dock */
+.taskbar {
+    position: fixed;
+    left: 50%;
+    bottom: 12px;
+    transform: translateX(-50%);
+    width: auto;
+    max-width: calc(100vw - 24px);
+    min-height: 48px;
+    padding: 8px 12px;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    background: rgba(5, 11, 8, 0.94);
+    border: 1px solid #24563a;
+    border-radius: 10px;
+    box-shadow: 0 0 24px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+}
+
+.dock-app {
+    width: 42px;
+    height: 42px;
+    color: #39ff88;
+    background: #102017;
+    border: 1px solid #24563a;
+    border-radius: 7px;
+    font: bold 17px "Courier New", monospace;
+    cursor: pointer;
+    transition: transform 0.15s, background 0.15s;
+}
+
+.dock-app:hover {
+    background: #193b27;
+    border-color: #39ff88;
+    transform: translateY(-4px);
+}
+
+.dock-divider {
+    width: 1px;
+    height: 28px;
+    background: #24563a;
+}
+
+.taskbar-message,
+.taskbar-version {
+    white-space: nowrap;
+    font-size: 10px;
+}
+
+.taskbar-brand {
+    display: none;
+}
+
+
+#evidence-counter {
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    padding: 10px 14px;
+    border: 1px solid #24563a;
+    background: #0d1510;
+    color: #39ff88;
+    font-size: 12px;
+    letter-spacing: 1px;
+    z-index: 30;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+}
+
+.resolve-btn {
+    background: #13251a;
+    color: #39ff88;
+    border: 1px solid #24563a;
+    padding: 6px 10px;
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.resolve-btn:hover {
+    background: #193b27;
+    border-color: #39ff88;
+}
+
+.resolve-btn.ready {
+    border-color: #39ff88;
+    box-shadow: 0 0 10px rgba(57, 255, 136, 0.4);
+}
+
+
+
+#terminal-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+}
+
+#terminal-input {
+    flex: 1;
+    min-width: 0;
+    padding: 8px;
+    background: #050b08;
+    color: #39ff88;
+    border: 1px solid #24563a;
+    font-family: "Courier New", monospace;
+    outline: none;
+
+}
+
+#terminal-form button {
+    padding: 8px 12px;
+    cursor: pointer;
+
+}
+
+
+
+.network-dashboard {
+    font-family: monospace;
+}
+
+.network-dashboard h3 {
+    color: #39ff88;
+    letter-spacing: 2px;
+}
+
+.network-node {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 12px;
+    margin: 8px 0;
+    background: #0d1510;
+    border: 1px solid #24563a;
+}
+
+.node-online {
+    color: #39ff88;
+}
+
+.node-offline {
+    color: #ff5555;
+}
+
+.network-warning {
+    color: #ff7777;
+    padding: 8px;
+    border-left: 3px solid #ff5555;
+    background: #1c1010;
+}
+
+.network-dashboard button {
+    margin-top: 12px;
+}
+
+/* DECISION & ENDING SCREENS */
+.decision-screen {
+    font-family: "Courier New", monospace;
+}
+
+.decision-heading {
+    color: #39ff88;
+    letter-spacing: 2px;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.decision-subtext {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #b4d9bf;
+    margin-bottom: 12px;
+}
+
+.decision-evidence-summary {
+    padding: 8px 12px;
+    background: #050b08;
+    border-left: 3px solid #39ff88;
+    font-size: 12px;
+    margin-bottom: 16px;
+    color: #7caa8b;
+}
+
+.decision-options {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.decision-card {
+    background: #09130c;
+    border: 1px solid #24563a;
+    padding: 12px;
+    transition: border-color 0.2s;
+}
+
+.decision-card:hover {
+    border-color: #39ff88;
+}
+
+.decision-card h4 {
+    margin: 0 0 6px 0;
+    color: #39ff88;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.decision-card p {
+    margin: 0 0 10px 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #9abfa7;
+    border: none;
+    padding: 0;
+    display: block;
+}
+
+.decision-btn {
+    width: 100%;
+    padding: 8px 12px;
+    background: #102017;
+    color: #39ff88;
+    border: 1px solid #24563a;
+    font-family: "Courier New", monospace;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.decision-btn:hover {
+    background: #193b27;
+    border-color: #39ff88;
+}
+
+/* ENDING DISPLAY */
+.ending-screen {
+    font-family: "Courier New", monospace;
+}
+
+.ending-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.badge-success {
+    color: #39ff88;
+    border: 1px solid #39ff88;
+    background: rgba(57, 255, 136, 0.1);
+}
+
+.badge-failure {
+    color: #ff5555;
+    border: 1px solid #ff5555;
+    background: rgba(255, 85, 85, 0.1);
+}
+
+.ending-title {
+    color: #39ff88;
+    font-size: 16px;
+    letter-spacing: 2px;
+    margin: 0 0 12px 0;
+}
+
+.ending-narrative {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #d2edd9;
+    margin-bottom: 16px;
+    white-space: pre-line;
+}
+
+.ending-evidence-summary {
+    background: #050b08;
+    border: 1px solid #24563a;
+    padding: 10px 14px;
+    margin: 14px 0;
+    font-size: 12px;
+}
+
+.ending-evidence-list {
+    margin: 8px 0 0 18px;
+    padding: 0;
+    color: #7caa8b;
+    font-size: 11px;
+}
+
+.ending-evidence-list li {
+    margin-bottom: 4px;
+}
+
+.restart-button {
+    display: block;
+    width: 100%;
+    margin-top: 18px;
+    padding: 12px;
+    background: #102017;
+    color: #39ff88;
+    border: 1px solid #39ff88;
+    font-family: "Courier New", monospace;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+
+.restart-button:hover {
+    background: #193b27;
+    box-shadow: 0 0 14px rgba(57, 255, 136, 0.4);
+}

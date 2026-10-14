@@ -9,9 +9,32 @@
 </head>
 <body>
     <div class="system-bar">
-        <span>NEXUS // MONITORING STATION</span>
-        <span id="clock">00:00:00</span>
-        <span class="network-status">● OFFLINE</span>
+        <div class="panel-left">
+            <button class="launcher-button" onclick="toggleLauncher()">◈ NEXUS</button>
+            <span class="workspace-label">WORKSPACE 01</span>
+        </div>
+
+        <div class="panel-right">
+            <span class="network-status">● OFFLINE</span>
+            <span id="clock">00:00:00</span>
+        </div>
+    </div>
+
+
+    <div id="launcher-menu" class="launcher-menu">
+        <div class="launcher-heading">NEXUS APPLICATIONS</div>
+       
+    <button onclick="closeLauncher(); openApp('files')">
+        ▤ &nbsp; File System
+    </button>
+
+    <button onclick="closeLauncher(); openApp('terminal')">
+        &gt;_ &nbsp; Terminal
+    </button>
+
+    <button onclick="closeLauncher(); openApp('browser')">
+        ◎ &nbsp; Network Monitor
+    </button>
     </div>
 
     <h1>DEAD SIGNAL</h1>
@@ -20,35 +43,57 @@
     <div class="desktop">
         <button class="desktop-icon" onclick="openApp('files')">
             <span class="icon-symbol">▤</span>
-            <span class="icon-lable">FILE SYSTEM</span>
+            <span class="icon-label">FILE SYSTEM</span>
         </button>
 
         <button class="desktop-icon" onclick="openApp('terminal')">
             <span class="icon-symbol">&gt;_</span>
-            <span class="icon-lable">TERMINAL</span>
+            <span class="icon-label">TERMINAL</span>
         </button>
 
         <button class="desktop-icon" onclick="openApp('browser')">
             <span class="icon-symbol">◎</span>
-            <span class="icon-lable">NETOWORK</span>
-            
+            <span class="icon-label">NETWORK</span>
         </button>
     </div>
 
-    <div id="app-window">
-        <div class="window-titlebar">
-            <h2 id="app-title">Application</h2>
-            <button class="close-button" onclick="closeApp()">X</button>
-        </div>
 
-        <div id="app-content">Welcome.</div>
+       
+    <div id="evidence-counter">
+        <span id="evidence-count-text">EVIDENCE: 0/4</span>
+        <button id="resolve-button" class="resolve-btn" onclick="openDecisionScreen()">FINAL DECISION</button>
     </div>
 
-    <div class="taskbar">
-        <span class="taskbar-brand">NEXUS OS</span>
-        <span class="taskbar-message">REGIONAL NETWORK: OFFLINE</span>
-        <span class="taskbar-version">SYS v0.1</span>
+<div id="app-window">
+    <div class="window-titlebar">
+        <h2 id="app-title">Application</h2>
+        <button class="close-button" onclick="closeApp()">X</button>
     </div>
+
+    <div id="app-content">Welcome.</div>
+</div>
+
+
+    
+<div class="taskbar">
+    <button class="dock-app" onclick="openApp('files')" title="File System">
+        ▤
+    </button>
+
+    <button class="dock-app" onclick="openApp('terminal')" title="Terminal">
+        &gt;_
+    </button>
+
+    <button class="dock-app" onclick="openApp('browser')" title="Network Monitor">
+        ◎
+    </button>
+
+    <div class="dock-divider"></div>
+
+    <span class="taskbar-message">NEXUS // OFFLINE</span>
+    <span class="taskbar-version">SYS v0.1</span>
+</div>
+
 
     <script src="script.js"></script>
 </body>
