@@ -1,177 +1,384 @@
+/* ==========================================================================
+   DEAD SIGNAL: KDE PLASMA / NEXUS 2047 WORKSTATION ENVIRONMENT
+   ========================================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
 body {
-    background-color: #080c0a;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: #050b08;
+    background-image: 
+        radial-gradient(
+            ellipse at 50% 35%,
+            rgba(16, 52, 32, 0.35),
+            transparent 70%
+        ),
+        linear-gradient(
+            rgba(57, 255, 136, 0.03) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(57, 255, 136, 0.03) 1px,
+            transparent 1px
+        );
+    background-size: 100% 100%, 32px 32px, 32px 32px;
+    background-attachment: fixed;
     color: #39ff88;
     font-family: 'Courier New', monospace;
-    margin: 0;
-    min-height: 100vh;
-    padding: 0;
-    box-sizing: border-box;
     overflow-x: hidden;
-
 }
 
-h1 {
-    color: #39ff88;
-    letter-spacing: 6px;
-    text-shadow: 0 0 12px #39ff88;
-
+/* Custom Sleek Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #08120b;
+}
+::-webkit-scrollbar-thumb {
+    background: #1b452e;
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #39ff88;
 }
 
-p {
-    color: #ff45ff;
-    border: 1px solid #ff4545;
-    padding: 12px;
-    display: inline-block;
-}
-
-
-
-#app-window {
-    display: none;
-    border: 1px solid #39ff88;
-    padding: 20px;
-    margin-top: 25px;
-    max-width: 500px;
-}
-
+/* COMPACT TOP PANEL (KDE Plasma Style) */
 .system-bar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: 38px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 16px;
-    padding: 12px 16px;
-    border: 1px solid #24563a;
-    background-color: #0d1510;
-    font-size: 12px;
+    padding: 0 14px;
+    background: rgba(9, 18, 13, 0.96);
+    border-bottom: 1px solid #1c452e;
+    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    font-size: 11px;
+}
 
+.panel-left,
+.panel-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.launcher-button {
+    padding: 4px 10px;
+    background: #11261b;
+    color: #39ff88;
+    border: 1px solid #235439;
+    border-radius: 4px;
+    font: bold 11px "Courier New", monospace;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
+    user-select: none;
+}
+
+.launcher-button:hover {
+    background: #173824;
+    border-color: #39ff88;
+    box-shadow: 0 0 8px rgba(57, 255, 136, 0.25);
+}
+
+.workspace-pager {
+    display: flex;
+    gap: 4px;
+}
+
+.workspace-tab {
+    padding: 2px 6px;
+    font-size: 10px;
+    border-radius: 3px;
+    color: #7caa8b;
+    background: #0c1811;
+    border: 1px solid #1a3c28;
+    cursor: default;
+    user-select: none;
+}
+
+.workspace-tab.active {
+    color: #39ff88;
+    background: #163624;
+    border-color: #39ff88;
+}
+
+.workspace-label {
+    display: none;
+}
+
+.system-hostname {
+    color: #5c8f70;
+    font-size: 11px;
+    letter-spacing: 0.5px;
 }
 
 .network-status {
-    color: #ff4545;
-    
-}
-
-
-#app-window {
-    background-color: #0d1510;
-    box-shadow: 0 0 18px #102c1b;
-
-}
-
-#app-title {
-    border-bottom: 1px solid #24563a;
-    padding-bottom: 12px;
-    margin-top: 0;
-
-}
-
-#app-content {
-    color: #b4d9bf;
-    line-height: 1.7;
-
+    color: #ff5555;
+    font-size: 11px;
+    letter-spacing: 0.5px;
 }
 
 #clock {
     color: #39ff88;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
     white-space: nowrap;
-
+    letter-spacing: 1px;
 }
 
-body > h1 , 
-body > p {
-    margin-left: 28px;
-
+/* LAUNCHER MENU (Plasma Kickoff Style) */
+.launcher-menu {
+    display: none;
+    position: fixed;
+    top: 44px;
+    left: 10px;
+    width: 240px;
+    padding: 10px;
+    background: rgba(10, 20, 15, 0.98);
+    border: 1px solid #235439;
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 1px #39ff88;
+    z-index: 2000;
+    backdrop-filter: blur(14px);
 }
 
-body > h1 {
-    margin-top: 30px;
-
+.launcher-heading {
+    padding: 6px 8px;
+    margin-bottom: 6px;
+    color: #7caa8b;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    border-bottom: 1px solid #1c452e;
+    font-weight: bold;
 }
 
-body > p {
-    margin-top: 12px;
-
+.launcher-menu button {
+    display: block;
+    width: 100%;
+    padding: 9px 12px;
+    margin-top: 3px;
+    text-align: left;
+    color: #b4d9bf;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font: 12px "Courier New", monospace;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 
+.launcher-menu button:hover {
+    background: #143021;
+    color: #39ff88;
+    border-color: #235439;
+}
 
+/* DESKTOP WALLPAPER & TELEMETRY WIDGET */
+.desktop-wallpaper-container {
+    padding: 24px 28px 12px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    max-width: 900px;
+}
+
+.desktop-branding h1 {
+    font-size: 32px;
+    letter-spacing: 6px;
+    color: #39ff88;
+    margin: 0 0 10px 0;
+    text-shadow: 0 0 8px rgba(57, 255, 136, 0.4);
+}
+
+.desktop-branding p {
+    color: #ff5555;
+    background: rgba(35, 12, 12, 0.7);
+    border: 1px solid #ff4545;
+    padding: 6px 12px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    display: inline-block;
+    margin: 0;
+    border-radius: 3px;
+}
+
+.desktop-widget-sysinfo {
+    background: rgba(10, 20, 15, 0.75);
+    border: 1px solid #235439;
+    border-radius: 6px;
+    padding: 10px 14px;
+    min-width: 260px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    font-size: 11px;
+}
+
+.widget-header {
+    color: #7caa8b;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    border-bottom: 1px solid #1e452f;
+    padding-bottom: 5px;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.widget-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+    font-size: 11px;
+}
+
+.w-label {
+    color: #5c8f70;
+}
+
+.w-val {
+    color: #39ff88;
+}
+
+.val-alert {
+    color: #ff5555;
+    font-weight: bold;
+}
+
+/* DESKTOP ICONS (KDE Plasma Grid) */
 .desktop {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 12px;
-    margin: 24px 16px;
-
+    gap: 14px;
+    margin: 16px 28px;
+    position: relative;
+    z-index: 10;
 }
 
-.desktop button {
-    width: 110px;
-    min-height: 85px;
-    background: transparent;
-    border: 1px solid transparent;
+.desktop-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 105px;
+    min-height: 92px;
+    padding: 10px;
+    background: rgba(10, 22, 16, 0.55);
+    border: 1px solid #1e452f;
+    border-radius: 6px;
     color: #39ff88;
-    font-size: 14px;
     font-family: "Courier New", monospace;
     cursor: pointer;
-    transition: background-color 0.2s , border-color 0.2s;
-
+    transition: background 0.15s, border-color 0.15s, transform 0.15s;
+    user-select: none;
 }
 
-.desktop button:hover {
-    background-color: #13251a;
-    border-color: #24563a;
-
+.desktop-icon:hover {
+    background: rgba(19, 43, 30, 0.8);
+    border-color: #39ff88;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
 }
 
-.taskbar {
+.icon-symbol {
+    font-size: 30px;
+    font-weight: bold;
+    text-shadow: 0 0 6px rgba(57, 255, 136, 0.4);
+}
+
+.icon-label {
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-align: center;
+    color: #a4cca5;
+}
+
+/* INCIDENT DOSSIER / EVIDENCE WIDGET */
+#evidence-counter.evidence-widget {
     position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    min-height: 42px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 10px 18px;
-    background-color: #0d1510;
-    border-top: 1px solid #24563a;
+    top: 50px;
+    right: 20px;
+    width: 215px;
+    padding: 12px;
+    border: 1px solid #235439;
+    background: rgba(9, 18, 13, 0.92);
+    border-radius: 6px;
     color: #39ff88;
     font-size: 11px;
     letter-spacing: 1px;
-    z-index: 100;
-
+    z-index: 30;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
 }
 
-.taskbar-message {
-    color: #ff4545;
-
-}
-
-.taskbar-version {
+.evidence-widget-header {
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
     color: #7caa8b;
-
+    border-bottom: 1px solid #1e452f;
+    padding-bottom: 4px;
 }
 
-#app-window {
+.evidence-progress-bar {
+    width: 100%;
+    height: 4px;
+    background: #061009;
+    border: 1px solid #1a3c28;
+    border-radius: 2px;
+    overflow: hidden;
+    margin: 4px 0 6px 0;
+}
+
+.evidence-progress-fill {
+    height: 100%;
+    background: #39ff88;
+    box-shadow: 0 0 6px #39ff88;
+    transition: width 0.3s ease;
+}
+
+/* APPLICATION WINDOW (KDE Breeze Window Manager) */
+#app-window.kde-window {
     display: none;
     position: fixed;
-    top: 18%;
+    top: 14%;
     left: 50%;
     transform: translateX(-50%);
-    width: min(560px , 85vw);
-    max-height: 60vh;
+    width: min(620px, 92vw);
+    max-height: 70vh;
     overflow-y: auto;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    border: 1px solid #39ff88;
-    background-color: #0d1510;
-    box-shadow: 0 0 24px #102c1b;
+    border: 1px solid #24563a;
+    border-radius: 6px;
+    background-color: rgba(9, 17, 13, 0.97);
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.8), 0 0 1px #39ff88;
     z-index: 50;
+    backdrop-filter: blur(14px);
+}
 
+#app-window.maximized {
+    top: 44px !important;
+    left: 10px !important;
+    width: calc(100vw - 20px) !important;
+    height: calc(100vh - 110px) !important;
+    max-height: calc(100vh - 110px) !important;
+    transform: none !important;
 }
 
 .window-titlebar {
@@ -179,25 +386,78 @@ body > p {
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    padding: 10px 14px;
-    background-color: #14251a;
-    border-bottom: 1px solid #24563a;
-
+    padding: 8px 12px;
+    background: linear-gradient(180deg, #15291e 0%, #0d1a13 100%);
+    border-bottom: 1px solid #204c35;
+    cursor: grab;
+    user-select: none;
 }
 
-#app-title {   
-    margin: 0px;
-    padding: 0px;
+.window-titlebar:active {
+    cursor: grabbing;
+}
+
+.window-title-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow: hidden;
+}
+
+.window-icon {
+    font-size: 13px;
+    color: #39ff88;
+}
+
+#app-title {
+    margin: 0;
+    padding: 0;
     border: none;
-    font-size: 16px;
-
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #d6f2df;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.close-button {
-    padding: 5px 10px;
-    color: #ff4545;
-    border-color: #ff4545;
+.window-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
 
+.win-btn {
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    background: #0d1c14;
+    border: 1px solid #204c35;
+    border-radius: 4px;
+    color: #7caa8b;
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+    line-height: 1;
+}
+
+.win-minimize:hover,
+.win-maximize:hover {
+    background: #173824;
+    color: #39ff88;
+    border-color: #39ff88;
+}
+
+.win-close:hover {
+    background: #8b1e1e;
+    color: #ffffff;
+    border-color: #ff4545;
 }
 
 #app-content {
@@ -207,271 +467,113 @@ body > p {
     overflow-wrap: anywhere;
 }
 
-
-#app-window,
-#app-content {
-    background-color: #0d1510;
-    color: #b4d9bf;
-
-}
-
 #app-content p {
     display: block;
     color: #b4d9bf;
     background: transparent;
     border: none;
     padding: 0;
-
+    margin: 0 0 10px 0;
 }
 
 #app-content button {
-    background-color: #101a14;
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+    padding: 10px 14px;
+    text-align: left;
+    background-color: #0d1a13;
     color: #39ff88;
-    border: 1px solid #24563a;
-
+    border: 1px solid #1e452f;
+    border-radius: 4px;
+    font-family: "Courier New", monospace;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
 }
 
 #app-content button:hover {
-    background-color: #193b27;
+    background-color: #153623;
     border-color: #39ff88;
-
 }
 
-.window-titlebar {
-    cursor: grab;
-    user-select: none;
-
-}
-
-.window-titlebar:active {
-    cursor: grabbing;
-}
-
-
-.desktop {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 14px;
-    margin: 24px 20px ;
-
-}
-
-.desktop-icon {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 9px;
-    width: 115px;
-    min-height: 100px;
-    padding: 12px;
-    background: rgba(13, 21, 16, 0.65);
-    border: 1px solid #24563a;
-    border-radius: 6px;
-    color: #39ff88;
-    font-family: "Courier New",monospace;
-    cursor: pointer;
-    transition: background 0.2s, border-color 0.2s,
-                box-shadow 0.2s, transform 0.2s;
-}
-
-.icon-symbol {
-    font-size: 34px;
-    font-weight: bold;
-    text-shadow: 0 0 10px #39ff88;
-
-}
-
-.icon-label {
-    font-size: 10px;
-    letter-spacing: 1px;
-    text-align: center;
-}
-
-
-body {
-    background-color: #050b08;
-    background-image: 
-    radial-gradient(
-        ellipse at 50% 40%,
-        rgba(18, 65,40,0.35),
-        transparent 70%
-    ) , 
-    linear-gradient(
-        rgba(57,255,136,0.035) 1px,
-        transparent 1px
-
-    ),
-    linear-gradient(
-        90deg,
-        rgba(57,255,136,0.035) 1px,
-        transparent 1px
-    );
-    background-size: 100% 100%, 32px 32px,32px 32px;
-    background-attachment: fixed;
-}
-
-
-.system-bar {
-    position: sticky;
-    top: 0;
-    z-index: 40;
-    min-height: 42px;
-    box-sizing: border-box;
-    background: rgba(5 , 11 , 8 , 0.96);
-    border: none;
-    border-bottom: 1px solid #24563a;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.35);
-
-}
-
-.panel-left,
-.panel-right {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-
-}
-
-.launcher-button {
-    padding: 7px 12px;
-    background: #13251a;
-    color: #39ff88;
-    border: 1px solid #24563a;
-    border-radius: 4px;
-    font: bold 12px "Courier New",monospace;
-    cursor: pointer;
-}
-
-.launcher-button:hover {
-    background-color: #193b27;
-    border-color: #39ff88;
-
-}
-
-.workspace-label {
-    color: #7caa8b;
-    font-size: 11px;
-    letter-spacing: 1px;
-
-}
-
-.panel-right {
-    white-space: nowrap;
-
-}
-
-
-.launcher-menu {
-    display: none;
-    position: fixed;
-    top: 50px;
-    left: 12px;
-    width: 230px;
-    padding: 12px;
-    box-sizing: border-box;
-    background: #0b140e;
-    border: 1px solid #24563a;
-    box-shadow: 0 0 24px rgba(0,0,0,0.7);
-    z-index: 200;
-
-}
-
-.launcher-heading {
-    padding: 8px;
-    margin-bottom: 8px;
-    color: #7caa8b;
-    font-size: 10px;
-    letter-spacing: 2px;
-    border-bottom: 1px solid #24563a;
-
-}
-
-.launcher-menu button {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    margin-top: 5px;
-    text-align: left;
-    color: #39ff88;
-    background: transparent;
-    border: 1px solid transparent;
-    font: 12px "Courier New",monospace;
-    cursor: pointer;
-}
-
-
-/* Linux-inspired bottom dock */
+/* BOTTOM DOCK / TASKBAR (KDE Plasma Panel) */
 .taskbar {
     position: fixed;
     left: 50%;
-    bottom: 12px;
+    bottom: 10px;
     transform: translateX(-50%);
     width: auto;
-    max-width: calc(100vw - 24px);
-    min-height: 48px;
-    padding: 8px 12px;
-    gap: 10px;
-    justify-content: center;
+    max-width: calc(100vw - 20px);
+    min-height: 44px;
+    padding: 5px 14px;
+    gap: 8px;
+    display: flex;
     align-items: center;
-    background: rgba(5, 11, 8, 0.94);
-    border: 1px solid #24563a;
-    border-radius: 10px;
-    box-shadow: 0 0 24px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
+    background: rgba(9, 18, 13, 0.94);
+    border: 1px solid #204c35;
+    border-radius: 8px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(12px);
+    z-index: 100;
 }
 
 .dock-app {
-    width: 42px;
-    height: 42px;
-    color: #39ff88;
-    background: #102017;
-    border: 1px solid #24563a;
-    border-radius: 7px;
-    font: bold 17px "Courier New", monospace;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 32px;
+    padding: 0 10px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #7caa8b;
+    font: bold 12px "Courier New", monospace;
     cursor: pointer;
-    transition: transform 0.15s, background 0.15s;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+    user-select: none;
 }
 
 .dock-app:hover {
-    background: #193b27;
+    background: #132b1e;
+    color: #39ff88;
+    border-color: #24563a;
+}
+
+.dock-app.active {
+    background: #163625;
+    color: #39ff88;
     border-color: #39ff88;
-    transform: translateY(-4px);
+    box-shadow: inset 0 -2px 0 #39ff88;
+}
+
+.dock-icon {
+    font-size: 15px;
+    line-height: 1;
+}
+
+.dock-name {
+    font-size: 11px;
+    letter-spacing: 0.5px;
 }
 
 .dock-divider {
     width: 1px;
-    height: 28px;
-    background: #24563a;
+    height: 24px;
+    background: #204c35;
 }
 
-.taskbar-message,
-.taskbar-version {
+.taskbar-message {
+    color: #ff5555;
     white-space: nowrap;
     font-size: 10px;
-}
-
-.taskbar-brand {
-    display: none;
-}
-
-
-#evidence-counter {
-    position: fixed;
-    top: 70px;
-    right: 20px;
-    padding: 10px 14px;
-    border: 1px solid #24563a;
-    background: #0d1510;
-    color: #39ff88;
-    font-size: 12px;
     letter-spacing: 1px;
-    z-index: 30;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    align-items: stretch;
+}
+
+.taskbar-version {
+    color: #5c8f70;
+    white-space: nowrap;
+    font-size: 10px;
 }
 
 .resolve-btn {
@@ -778,40 +880,25 @@ body.crt-off .crt-toggle-button {
     top: 0; left: 0; bottom: 0; right: 0;
     background: linear-gradient(
         rgba(18, 16, 16, 0) 50%, 
-        rgba(0, 0, 0, 0.22) 50%
-    ), linear-gradient(
-        90deg,
-        rgba(255, 0, 0, 0.02),
-        rgba(0, 255, 0, 0.01),
-        rgba(0, 0, 255, 0.02)
+        rgba(0, 0, 0, 0.08) 50%
     );
-    background-size: 100% 3px, 6px 100%;
+    background-size: 100% 3px;
     z-index: 9001;
     pointer-events: none;
 }
 
-/* 2. Monitor curvature, vignette, inner bezel shadow, and subtle glass glare */
+/* 2. Dramatically toned-down vignette and inner bezel shadow */
 .crt-overlay::after {
     content: " ";
     display: block;
     position: absolute;
     top: 0; left: 0; bottom: 0; right: 0;
-    background: 
-        radial-gradient(
-            ellipse at center,
-            transparent 64%,
-            rgba(3, 7, 5, 0.3) 84%,
-            rgba(0, 0, 0, 0.75) 100%
-        ),
-        linear-gradient(
-            135deg,
-            rgba(255, 255, 255, 0.025) 0%,
-            rgba(57, 255, 136, 0.008) 22%,
-            transparent 42%
-        );
-    box-shadow: 
-        inset 0 0 50px rgba(0, 0, 0, 0.85),
-        inset 0 0 15px rgba(20, 50, 32, 0.45);
+    background: radial-gradient(
+        ellipse at center,
+        transparent 82%,
+        rgba(0, 0, 0, 0.2) 100%
+    );
+    box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.35);
     z-index: 9002;
     pointer-events: none;
 }
@@ -832,37 +919,37 @@ body.crt-off .crt-toggle-button {
     }
 }
 
-/* 4. Phosphor Glow enhancements */
+/* 4. Restrained Phosphor Glow (Prioritizes crisp readability) */
 body:not(.crt-off) h1 {
-    text-shadow: 0 0 8px rgba(57, 255, 136, 0.65), 0 0 18px rgba(57, 255, 136, 0.25);
-}
-
-body:not(.crt-off) .icon-symbol {
-    text-shadow: 0 0 8px rgba(57, 255, 136, 0.7), 0 0 16px rgba(57, 255, 136, 0.3);
-}
-
-body:not(.crt-off) #clock {
-    text-shadow: 0 0 6px rgba(57, 255, 136, 0.55);
-}
-
-body:not(.crt-off) #app-title {
     text-shadow: 0 0 6px rgba(57, 255, 136, 0.45);
 }
 
+body:not(.crt-off) .icon-symbol {
+    text-shadow: 0 0 6px rgba(57, 255, 136, 0.45);
+}
+
+body:not(.crt-off) #clock {
+    text-shadow: 0 0 4px rgba(57, 255, 136, 0.4);
+}
+
+body:not(.crt-off) #app-title {
+    text-shadow: 0 0 4px rgba(57, 255, 136, 0.35);
+}
+
 body:not(.crt-off) .node-online {
-    text-shadow: 0 0 6px rgba(57, 255, 136, 0.6);
+    text-shadow: 0 0 4px rgba(57, 255, 136, 0.5);
 }
 
 body:not(.crt-off) .node-offline {
-    text-shadow: 0 0 6px rgba(255, 85, 85, 0.6);
+    text-shadow: 0 0 4px rgba(255, 85, 85, 0.5);
 }
 
 body:not(.crt-off) #terminal-output {
-    text-shadow: 0 0 3px rgba(57, 255, 136, 0.25);
+    text-shadow: none;
 }
 
 body:not(.crt-off) #app-window {
-    box-shadow: 0 0 24px rgba(16, 44, 27, 0.8), inset 0 0 12px rgba(16, 44, 27, 0.3);
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.8), 0 0 1px #39ff88;
 }
 
 /* 5. Disabled State */

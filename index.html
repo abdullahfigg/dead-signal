@@ -12,7 +12,12 @@
     <div class="system-bar">
         <div class="panel-left">
             <button class="launcher-button" onclick="toggleLauncher()">◈ NEXUS</button>
+            <div class="workspace-pager">
+                <span class="workspace-tab active">01</span>
+                <span class="workspace-tab">02</span>
+            </div>
             <span class="workspace-label">WORKSPACE 01</span>
+            <span class="system-hostname">ws-01: regional-ops</span>
         </div>
 
         <div class="panel-right">
@@ -26,21 +31,39 @@
     <div id="launcher-menu" class="launcher-menu">
         <div class="launcher-heading">NEXUS APPLICATIONS</div>
        
-    <button onclick="closeLauncher(); openApp('files')">
-        ▤ &nbsp; File System
-    </button>
+        <button onclick="closeLauncher(); openApp('files')">
+            ▤ &nbsp; File System
+        </button>
 
-    <button onclick="closeLauncher(); openApp('terminal')">
-        &gt;_ &nbsp; Terminal
-    </button>
+        <button onclick="closeLauncher(); openApp('terminal')">
+            &gt;_ &nbsp; Terminal
+        </button>
 
-    <button onclick="closeLauncher(); openApp('browser')">
-        ◎ &nbsp; Network Monitor
-    </button>
+        <button onclick="closeLauncher(); openApp('browser')">
+            ◎ &nbsp; Network Monitor
+        </button>
+
+        <div class="dock-divider" style="margin: 6px 0; width: 100%; height: 1px;"></div>
+
+        <button onclick="closeLauncher(); openDecisionScreen()">
+            ◈ &nbsp; Incident Resolution
+        </button>
     </div>
 
-    <h1>DEAD SIGNAL</h1>
-    <p>NETWORK STATUS: CONNECTION LOST</p>
+    <div class="desktop-wallpaper-container">
+        <div class="desktop-branding">
+            <h1>DEAD SIGNAL</h1>
+            <p>NETWORK STATUS: CONNECTION LOST</p>
+        </div>
+
+        <div class="desktop-widget-sysinfo">
+            <div class="widget-header">NEXUS WORKSTATION // KDE-47</div>
+            <div class="widget-row"><span class="w-label">KERNEL:</span> <span class="w-val">Linux 7.14-nexus-rt</span></div>
+            <div class="widget-row"><span class="w-label">HOST:</span> <span class="w-val">REGIONAL-OPS-04</span></div>
+            <div class="widget-row"><span class="w-label">SECTOR:</span> <span class="w-val val-alert">03:17:00 BLACKOUT</span></div>
+            <div class="widget-row"><span class="w-label">SECURITY:</span> <span class="w-val">DEFCON 2 // ISOLATED</span></div>
+        </div>
+    </div>
 
     <div class="desktop">
         <button class="desktop-icon" onclick="openApp('files')">
@@ -61,15 +84,26 @@
 
 
        
-    <div id="evidence-counter">
+    <div id="evidence-counter" class="evidence-widget">
+        <div class="evidence-widget-header">INCIDENT DOSSIER</div>
         <span id="evidence-count-text">EVIDENCE: 0/4</span>
+        <div class="evidence-progress-bar">
+            <div id="evidence-progress-fill" class="evidence-progress-fill" style="width: 0%"></div>
+        </div>
         <button id="resolve-button" class="resolve-btn" onclick="openDecisionScreen()">FINAL DECISION</button>
     </div>
 
-<div id="app-window">
+<div id="app-window" class="kde-window">
     <div class="window-titlebar">
-        <h2 id="app-title">Application</h2>
-        <button class="close-button" onclick="closeApp()">X</button>
+        <div class="window-title-group">
+            <span id="window-icon" class="window-icon">◈</span>
+            <h2 id="app-title">Application</h2>
+        </div>
+        <div class="window-controls">
+            <button class="win-btn win-minimize" onclick="minimizeApp()" title="Minimize" aria-label="Minimize">─</button>
+            <button class="win-btn win-maximize" onclick="toggleMaximizeApp()" title="Maximize" aria-label="Maximize">□</button>
+            <button class="win-btn win-close close-button" onclick="closeApp()" title="Close" aria-label="Close">✕</button>
+        </div>
     </div>
 
     <div id="app-content">Welcome.</div>
@@ -78,22 +112,25 @@
 
     
 <div class="taskbar">
-    <button class="dock-app" onclick="openApp('files')" title="File System">
-        ▤
+    <button id="dock-btn-files" class="dock-app" onclick="openApp('files')" title="File System">
+        <span class="dock-icon">▤</span>
+        <span class="dock-name">Files</span>
     </button>
 
-    <button class="dock-app" onclick="openApp('terminal')" title="Terminal">
-        &gt;_
+    <button id="dock-btn-terminal" class="dock-app" onclick="openApp('terminal')" title="Terminal">
+        <span class="dock-icon">&gt;_</span>
+        <span class="dock-name">Terminal</span>
     </button>
 
-    <button class="dock-app" onclick="openApp('browser')" title="Network Monitor">
-        ◎
+    <button id="dock-btn-browser" class="dock-app" onclick="openApp('browser')" title="Network Monitor">
+        <span class="dock-icon">◎</span>
+        <span class="dock-name">Network</span>
     </button>
 
     <div class="dock-divider"></div>
 
     <span class="taskbar-message">NEXUS // OFFLINE</span>
-    <span class="taskbar-version">SYS v0.1</span>
+    <span class="taskbar-version">KDE-NEXUS 47</span>
 </div>
 
 

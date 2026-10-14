@@ -20,24 +20,39 @@ const evidenceFiles = {
 };
 
 
+// ACTIVE DOCK TRACKER
+function updateActiveDock(activeApp) {
+    const dockButtons = document.querySelectorAll(".dock-app");
+    dockButtons.forEach(btn => btn.classList.remove("active"));
+    if (activeApp) {
+        const activeBtn = document.getElementById("dock-btn-" + activeApp);
+        if (activeBtn) activeBtn.classList.add("active");
+    }
+}
+
+
 // OPEN APPLICATIONS
 function openApp(app) {
     const windowBox = document.getElementById("app-window");
     const title = document.getElementById("app-title");
     const content = document.getElementById("app-content");
+    const winIcon = document.getElementById("window-icon");
 
     windowBox.style.display = "block";
+    updateActiveDock(app);
 
     if (app === "files") {
+        if (winIcon) winIcon.textContent = "▤";
         title.textContent = "NEXUS File Explorer";
         showFileList();
 
     } else if (app === "terminal") {
+        if (winIcon) winIcon.textContent = ">_";
         title.textContent = "NEXUS Terminal";
 
         content.innerHTML = `
             <div id="terminal-output">
-                NEXUS TERMINAL v0.2<br>
+                NEXUS TERMINAL v0.2 [KDE-BASH // tty1]<br>
                 Type help to see commands.
             </div>
 
@@ -69,6 +84,7 @@ function openApp(app) {
         terminalInput.focus();
 
     } else if (app === "browser") {
+        if (winIcon) winIcon.textContent = "◎";
         title.textContent = "NEXUS Network Monitor";
 
         content.innerHTML = `
@@ -116,7 +132,27 @@ function openApp(app) {
 
 // CLOSE APPLICATION
 function closeApp() {
-    document.getElementById("app-window").style.display = "none";
+    const windowBox = document.getElementById("app-window");
+    if (windowBox) windowBox.style.display = "none";
+    updateActiveDock(null);
+}
+
+// MINIMIZE APPLICATION
+function minimizeApp() {
+    closeApp();
+}
+
+// TOGGLE MAXIMIZE APPLICATION
+function toggleMaximizeApp() {
+    const windowBox = document.getElementById("app-window");
+    const maxBtn = document.querySelector(".win-maximize");
+    if (!windowBox) return;
+
+    const isMax = windowBox.classList.toggle("maximized");
+    if (maxBtn) {
+        maxBtn.textContent = isMax ? "❐" : "□";
+        maxBtn.title = isMax ? "Restore" : "Maximize";
+    }
 }
 
 
@@ -260,6 +296,7 @@ function collectEvidence(filename) {
 function updateEvidenceCounter() {
     const countText = document.getElementById("evidence-count-text");
     const resolveBtn = document.getElementById("resolve-button");
+    const progressFill = document.getElementById("evidence-progress-fill");
 
     const collectedCount = Object.values(evidenceFiles)
         .filter(file => file.collected)
@@ -274,6 +311,11 @@ function updateEvidenceCounter() {
         if (counter) {
             counter.textContent = `EVIDENCE: ${collectedCount}/${totalFiles}`;
         }
+    }
+
+    if (progressFill) {
+        const percent = Math.round((collectedCount / totalFiles) * 100);
+        progressFill.style.width = percent + "%";
     }
 
     if (resolveBtn) {
@@ -291,8 +333,11 @@ function openDecisionScreen() {
     const windowBox = document.getElementById("app-window");
     const title = document.getElementById("app-title");
     const content = document.getElementById("app-content");
+    const winIcon = document.getElementById("window-icon");
 
     windowBox.style.display = "block";
+    if (winIcon) winIcon.textContent = "◈";
+    updateActiveDock(null);
     title.textContent = "NEXUS Incident Resolution";
 
     const collectedCount = Object.values(evidenceFiles)
@@ -439,12 +484,24 @@ function restartMission() {
     const windowBox = document.getElementById("app-window");
     const title = document.getElementById("app-title");
     const content = document.getElementById("app-content");
+    const winIcon = document.getElementById("window-icon");
+    const maxBtn = document.querySelector(".win-maximize");
 
     if (windowBox) {
+        windowBox.classList.remove("maximized");
         windowBox.style.display = "none";
         windowBox.style.left = "";
         windowBox.style.top = "";
         windowBox.style.transform = "";
+    }
+
+    if (maxBtn) {
+        maxBtn.textContent = "□";
+        maxBtn.title = "Maximize";
+    }
+
+    if (winIcon) {
+        winIcon.textContent = "◈";
     }
 
     if (title) {
@@ -456,6 +513,7 @@ function restartMission() {
         content.innerHTML = "Welcome.";
     }
 
+    updateActiveDock(null);
     closeLauncher();
 }
 
@@ -587,7 +645,11 @@ let offsetY = 0;
 
 if (appWindow && titleBar) {
     titleBar.addEventListener("mousedown", function(event) {
-        if (event.target.closest(".close-button")) {
+        if (event.target.closest(".window-controls") || event.target.closest(".close-button")) {
+            return;
+        }
+
+        if (appWindow.classList.contains("maximized")) {
             return;
         }
 
