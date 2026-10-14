@@ -51,17 +51,18 @@ function openApp(app) {
         title.textContent = "NEXUS Terminal";
 
         content.innerHTML = `
-            <div id="terminal-output">
-                NEXUS TERMINAL v0.2 [KDE-BASH // tty1]<br>
-                Type help to see commands.
-            </div>
+            <div class="terminal-container">
+                <div id="terminal-output" class="terminal-output-area">
+                    <span class="term-banner">NEXUS TERMINAL OS v0.2.47 [KDE-BASH // tty1]</span>
+                    <span class="term-dim">Type 'help' to display available incident diagnostics.</span>
+                </div>
 
-            <form id="terminal-form">
-                <span>&gt;_</span>
-                <input id="terminal-input" type="text"
-                    autocomplete="off" autofocus>
-                <button type="submit">RUN</button>
-            </form>
+                <form id="terminal-form" class="terminal-input-bar">
+                    <span class="terminal-prompt">nexus@ws-01:~$</span>
+                    <input id="terminal-input" type="text"
+                        autocomplete="off" autofocus spellcheck="false">
+                </form>
+            </div>
         `;
 
         const terminalForm =
@@ -526,8 +527,9 @@ function runTerminalCommand(command) {
     if (command === "") return;
 
     const result = document.createElement("div");
+    result.className = "terminal-entry";
     result.style.whiteSpace = "pre-wrap";
-    result.textContent = ">_" + command;
+    result.textContent = "nexus@ws-01:~$ " + command;
 
     const parts = command.trim().split(/\s+/);
     const action = parts[0];
