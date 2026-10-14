@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="crt-overlay" class="crt-overlay" aria-hidden="true"></div>
     <div class="system-bar">
         <div class="panel-left">
             <button class="launcher-button" onclick="toggleLauncher()">◈ NEXUS</button>
@@ -15,6 +16,7 @@
         </div>
 
         <div class="panel-right">
+            <button id="crt-toggle" class="crt-toggle-button" onclick="toggleCRT()" title="Toggle CRT Simulation">CRT [ON]</button>
             <span class="network-status">● OFFLINE</span>
             <span id="clock">00:00:00</span>
         </div>

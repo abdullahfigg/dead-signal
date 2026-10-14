@@ -726,3 +726,162 @@ body {
     background: #193b27;
     box-shadow: 0 0 14px rgba(57, 255, 136, 0.4);
 }
+
+/* ==========================================================================
+   CRT ATMOSPHERE & RETRO-FUTURISTIC MONITOR OVERHAUL
+   ========================================================================== */
+
+/* CRT Toggle Button in System Bar */
+.crt-toggle-button {
+    background: #102017;
+    color: #39ff88;
+    border: 1px solid #24563a;
+    border-radius: 4px;
+    padding: 3px 8px;
+    font: bold 10px "Courier New", monospace;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+    user-select: none;
+}
+
+.crt-toggle-button:hover {
+    background: #193b27;
+    border-color: #39ff88;
+    box-shadow: 0 0 8px rgba(57, 255, 136, 0.3);
+}
+
+body.crt-off .crt-toggle-button {
+    color: #557762;
+    border-color: #1a3827;
+    background: transparent;
+}
+
+/* CRT Screen Frame & Overlay Container */
+.crt-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9000;
+    overflow: hidden;
+    animation: crt-flicker 9s ease-in-out infinite;
+}
+
+/* 1. Subtle horizontal scanlines across the display */
+.crt-overlay::before {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(
+        rgba(18, 16, 16, 0) 50%, 
+        rgba(0, 0, 0, 0.22) 50%
+    ), linear-gradient(
+        90deg,
+        rgba(255, 0, 0, 0.02),
+        rgba(0, 255, 0, 0.01),
+        rgba(0, 0, 255, 0.02)
+    );
+    background-size: 100% 3px, 6px 100%;
+    z-index: 9001;
+    pointer-events: none;
+}
+
+/* 2. Monitor curvature, vignette, inner bezel shadow, and subtle glass glare */
+.crt-overlay::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: 
+        radial-gradient(
+            ellipse at center,
+            transparent 64%,
+            rgba(3, 7, 5, 0.3) 84%,
+            rgba(0, 0, 0, 0.75) 100%
+        ),
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.025) 0%,
+            rgba(57, 255, 136, 0.008) 22%,
+            transparent 42%
+        );
+    box-shadow: 
+        inset 0 0 50px rgba(0, 0, 0, 0.85),
+        inset 0 0 15px rgba(20, 50, 32, 0.45);
+    z-index: 9002;
+    pointer-events: none;
+}
+
+/* 3. Screen Flicker: Very subtle analog cathode voltage fluctuation */
+@keyframes crt-flicker {
+    0%, 93%, 97%, 100% {
+        opacity: 1;
+        filter: brightness(1);
+    }
+    94% {
+        opacity: 0.985;
+        filter: brightness(0.975);
+    }
+    96% {
+        opacity: 0.995;
+        filter: brightness(1.02);
+    }
+}
+
+/* 4. Phosphor Glow enhancements */
+body:not(.crt-off) h1 {
+    text-shadow: 0 0 8px rgba(57, 255, 136, 0.65), 0 0 18px rgba(57, 255, 136, 0.25);
+}
+
+body:not(.crt-off) .icon-symbol {
+    text-shadow: 0 0 8px rgba(57, 255, 136, 0.7), 0 0 16px rgba(57, 255, 136, 0.3);
+}
+
+body:not(.crt-off) #clock {
+    text-shadow: 0 0 6px rgba(57, 255, 136, 0.55);
+}
+
+body:not(.crt-off) #app-title {
+    text-shadow: 0 0 6px rgba(57, 255, 136, 0.45);
+}
+
+body:not(.crt-off) .node-online {
+    text-shadow: 0 0 6px rgba(57, 255, 136, 0.6);
+}
+
+body:not(.crt-off) .node-offline {
+    text-shadow: 0 0 6px rgba(255, 85, 85, 0.6);
+}
+
+body:not(.crt-off) #terminal-output {
+    text-shadow: 0 0 3px rgba(57, 255, 136, 0.25);
+}
+
+body:not(.crt-off) #app-window {
+    box-shadow: 0 0 24px rgba(16, 44, 27, 0.8), inset 0 0 12px rgba(16, 44, 27, 0.3);
+}
+
+/* 5. Disabled State */
+body.crt-off .crt-overlay {
+    display: none !important;
+}
+
+body.crt-off {
+    animation: none !important;
+}
+
+/* 6. Accessibility: prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+    .crt-overlay {
+        animation: none !important;
+    }
+    .crt-overlay::before,
+    .crt-overlay::after {
+        animation: none !important;
+    }
+}
+

@@ -477,7 +477,7 @@ function runTerminalCommand(command) {
 
     if (action === "help") {
         result.textContent +=
-            "\nCommands: help, ls, cat, whoami, status, resolve, restart, clear";
+            "\nCommands: help, ls, cat, whoami, status, crt, resolve, restart, clear";
 
     } else if (action === "ls") {
         let fileList =
@@ -547,6 +547,12 @@ function runTerminalCommand(command) {
             "\nSYSTEM: NEXUS\nNETWORK: OFFLINE\n" +
             "INCIDENT: REGIONAL CONNECTION LOST\n" +
             "LAST FAILURE: 03:17:00";
+
+    } else if (action === "crt") {
+        toggleCRT();
+        const isOff = document.body.classList.contains("crt-off");
+        result.textContent +=
+            "\nCRT monitor simulation: " + (isOff ? "DISABLED [OFF]" : "ACTIVE [ON]");
 
     } else if (action === "resolve" || action === "decide") {
         result.textContent +=
@@ -659,3 +665,32 @@ function investigateNetwork() {
 
 // INITIAL EVIDENCE COUNTER
 updateEvidenceCounter();
+
+
+// CRT ATMOSPHERE TOGGLE
+function toggleCRT() {
+    const isOff = document.body.classList.toggle("crt-off");
+    const toggleBtn = document.getElementById("crt-toggle");
+    if (toggleBtn) {
+        toggleBtn.textContent = isOff ? "CRT [OFF]" : "CRT [ON]";
+    }
+    try {
+        if (typeof localStorage !== "undefined") {
+            localStorage.setItem("dead_signal_crt", isOff ? "off" : "on");
+        }
+    } catch (e) {}
+}
+
+// Initialize saved CRT preference
+(function initCRTPreference() {
+    try {
+        if (typeof localStorage !== "undefined" && localStorage.getItem("dead_signal_crt") === "off") {
+            document.body.classList.add("crt-off");
+            const toggleBtn = document.getElementById("crt-toggle");
+            if (toggleBtn) {
+                toggleBtn.textContent = "CRT [OFF]";
+            }
+        }
+    } catch (e) {}
+})();
+
